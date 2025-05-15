@@ -9,11 +9,7 @@ from tab.order import order_tab
 from tab.problems import problems_tab
 from tab.settings import setting_tab
 
-header = """
-# CPP 抢票🌈
 
-⚠️此项目完全开源免费 （[项目地址](https://github.com/mikumifa/cppTickerBuy)），切勿进行盈利，所造成的后果与本人无关。
-"""
 
 short_js = """
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" rel="external nofollow"></script>
@@ -36,7 +32,6 @@ if __name__ == "__main__":
 
     logger.add("app.log")
     with gr.Blocks(head=short_js, css=custom_css) as demo:
-        gr.Markdown(header)
         with gr.Tab("配置"):
             setting_tab()
         with gr.Tab("抢票"):
