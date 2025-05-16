@@ -123,6 +123,39 @@ def go_tab():
 
     validate_con = threading.Condition()
 
+
+
+    mode_ui.change(
+        fn=lambda x: gr.update(visible=True)
+        if x == 1
+        else gr.update(visible=False),
+        inputs=[mode_ui],
+        outputs=total_attempts_ui,
+    )
+    with gr.Row():
+        go_btn = gr.Button("开始抢票")
+        stop_btn = gr.Button("停止", visible=False)
+
+    with gr.Row():
+        go_ui = gr.Textbox(
+            info="此窗口为临时输出，具体请见控制台",
+            label="输出信息",
+            interactive=False,
+            visible=False,
+            show_copy_button=True,
+            max_lines=10,
+
+        )
+        qr_image = gr.Image(label="使用微信扫码支付", visible=False, elem_classes="pay_qrcode")
+
+    time_tmp = gr.Textbox(visible=False)
+
+    go_btn.click(
+        fn=None,
+        inputs=None,
+        outputs=time_tmp,
+        js='(x) => document.getElementById("datetime").value',
+    )
     def start_go(tickets_info_str, time_start, interval, mode,
                  total_attempts, audio_path):
         nonlocal isRunning
@@ -320,39 +353,6 @@ def go_tab():
             gr.update(),
             gr.update(),
         ]
-
-    mode_ui.change(
-        fn=lambda x: gr.update(visible=True)
-        if x == 1
-        else gr.update(visible=False),
-        inputs=[mode_ui],
-        outputs=total_attempts_ui,
-    )
-    with gr.Row():
-        go_btn = gr.Button("开始抢票")
-        stop_btn = gr.Button("停止", visible=False)
-
-    with gr.Row():
-        go_ui = gr.Textbox(
-            info="此窗口为临时输出，具体请见控制台",
-            label="输出信息",
-            interactive=False,
-            visible=False,
-            show_copy_button=True,
-            max_lines=10,
-
-        )
-        qr_image = gr.Image(label="使用微信扫码支付", visible=False, elem_classes="pay_qrcode")
-
-    time_tmp = gr.Textbox(visible=False)
-
-    go_btn.click(
-        fn=None,
-        inputs=None,
-        outputs=time_tmp,
-        js='(x) => document.getElementById("datetime").value',
-    )
-
     def stop():
         nonlocal isRunning
         isRunning = False
