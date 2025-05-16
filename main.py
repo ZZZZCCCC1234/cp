@@ -20,7 +20,7 @@ custom_css = """
 .pay_qrcode img {
   width: 300px !important;
   height: 300px !important;
-  margin-top: 20px; /* 避免二维码头部的说明文111字挡住二维码 */
+  margin-top: 20px; /* 避免二维码头部的说明文字挡住二维码 */
 }
 """
 
